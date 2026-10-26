@@ -1,15 +1,18 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import { UserRound } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const leftLinks = [
-  { label: "Home", href: "/", active: true },
+  { label: "Home", href: "/" },
   { label: "Destinations", href: "/destinations" },
   { label: "My Bookings", href: "/bookings" },
   { label: "Admin", href: "/admin" },
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   return (
     <header className="absolute top-3 right-3 left-3 z-20 rounded-lg bg-white shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
       <nav className="flex h-14 items-center justify-between px-10">
@@ -19,7 +22,7 @@ export function Navbar() {
               <Link
                 href={link.href}
                 className={`text-[17px] font-medium transition-colors hover:text-[#15A1BF] ${
-                  link.active ? "text-[#15A1BF]" : "text-neutral-900"
+                  pathname === `${link.href}` ? "text-[#15A1BF]" : "text-neutral-900"
                 }`}
               >
                 {link.label}
