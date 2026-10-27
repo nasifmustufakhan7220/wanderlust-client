@@ -17,7 +17,7 @@ export interface IDestination {
 
 const DestinationCard = ({ destination } : {destination: IDestination}) => {
   return (
-    <div className="group w-full min-w-0 bg-white mt-8">
+    <div className="group w-full min-w-0 bg-white border shadow-sm p-4 rounded">
       {/* Destination Image */}
       <div className="relative aspect-[2.05/1] w-full overflow-hidden bg-gray-100">
         <Image

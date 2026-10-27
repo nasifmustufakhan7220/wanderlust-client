@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 const leftLinks = [
   { label: "Home", href: "/" },
   { label: "Destinations", href: "/destinations" },
+  { label: "Add Destinaton", href: "/add-destination" },
   { label: "My Bookings", href: "/bookings" },
-  { label: "Admin", href: "/admin" },
 ];
 
 export function Navbar() {

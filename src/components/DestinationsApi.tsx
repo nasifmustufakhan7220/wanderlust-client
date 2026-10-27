@@ -27,7 +27,7 @@ const DestinationsApi = async () => {
         <Sorting destinations={destinations}/>
       </div>
 
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 mt-8 gap-5 mb-8">
         {destinations.map((destination) => (
           <DestinationCard key={destination._id} destination={destination} />
         ))}
