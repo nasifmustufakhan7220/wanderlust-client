@@ -62,7 +62,7 @@ export function Navbar() {
           </li>
           <li>
             <Link
-              href="/signup"
+              href="/sign-up"
               className="text-[17px] font-medium text-neutral-900 transition-colors hover:text-[#15A1BF]"
             >
               Sign Up
