@@ -5,12 +5,12 @@ import {
   ArrowRight,
   MapPin,
   CalendarDays,
-  Trash2,
   Check,
   Star,
 } from "lucide-react";
 import { IDestination } from "./DestinationCard";
 import EditDialog from "./EditDialog";
+import DeleteDialog from "./DeleteDialog";
 
 // Get destination details from backend
 export const getDetails = async (id: string) => {
@@ -43,13 +43,7 @@ const DestinationDetailsCard = async ({
           <div className="flex gap-2">
             <EditDialog detail={detail}/>
 
-            <Link
-              href="/"
-              className="flex items-center gap-1.5 border border-red-300 px-3 py-1.5 text-xs text-red-500 hover:bg-red-50"
-            >
-              <Trash2 size={12} />
-              Cancel
-            </Link>
+            <DeleteDialog detail={detail}/>
           </div>
         </div>
 
