@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import { CalendarDays, MapPin, ArrowUpRight } from "lucide-react";
+import { CalendarDays, MapPin, ArrowUpRight, Star } from "lucide-react";
 
 export interface IDestination {
   _id: string;
@@ -29,6 +29,10 @@ const DestinationCard = ({ destination } : {destination: IDestination}) => {
         />
 
         {/* Rating Badge */}
+        <div className="absolute right-3 top-3 flex items-center gap-1 bg-white/90 px-2 py-1 text-xs font-medium text-black shadow-sm">
+          <span>4.5</span>
+          <Star size={12} fill="currentColor" />
+        </div>
         
       </div>
 
