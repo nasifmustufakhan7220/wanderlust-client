@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Suspense } from "react";
+import { Toaster } from "react-hot-toast";
 
 const JosefinSans = Josefin_Sans({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="flex-1">
           {children}
         </div>
+         <Toaster />
         <Footer />
       </body>
     </html>

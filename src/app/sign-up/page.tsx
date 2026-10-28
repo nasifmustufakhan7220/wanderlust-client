@@ -1,39 +1,60 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+"use client";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
   FieldSeparator,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { signUp } from "@/lib/auth-client"
-import Link from "next/link"
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { signUp } from "@/lib/auth-client";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function SignUpPage() {
-    const handelSignUp = async(e:React.SubmitEvent<HTMLFormElement>)=>{
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const userSignUpData = Object.fromEntries(formData.entries()) as {name: string, image:string, email:string, password:string};
-        const {data, error} = await signUp.email({
-            ...userSignUpData
-        });
+  const handelSignUp = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const userSignUpData = Object.fromEntries(formData.entries()) as {
+      name: string;
+      image: string;
+      email: string;
+      password: string;
+    };
+    const { data, error } = await signUp.email({
+      ...userSignUpData,
+    });
 
-        console.log(data, error);
+    if (data) {
+      toast.success("You Sign Up successfully", {
+        duration: 4000,
+        position: "top-center",
+        style: {},
+        className: "",
+        iconTheme: {
+          primary: "#000",
+          secondary: "#fff",
+        },
+        ariaProps: {
+          role: "status",
+          "aria-live": "polite",
+        },
+        removeDelay: 1000,
+        toasterId: "default",
+      });
+      redirect('/sign-in');
+    }else{
+      toast.error(`${error.message}`);
     }
+  };
   return (
-    <div className={"flex flex-col gap-6 max-w-2xl mx-auto mt-30 mb-8"} >
+    <div className={"flex flex-col gap-6 max-w-2xl mx-auto mt-30 mb-8"}>
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Create Your Account</CardTitle>
-
         </CardHeader>
         <CardContent>
           <form onSubmit={handelSignUp}>
@@ -65,12 +86,7 @@ export default function SignUpPage() {
 
               <Field>
                 <FieldLabel htmlFor="name">ImageUrl</FieldLabel>
-                <Input
-                  id="image"
-                  type="url"
-                  name="image"
-                  placeholder="image"
-                />
+                <Input id="image" type="url" name="image" placeholder="image" />
               </Field>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -95,9 +111,14 @@ export default function SignUpPage() {
                 <Input id="password" name="password" type="password" required />
               </Field>
               <Field>
-                <Button className={`bg-[#15a0bf] hover:bg-[#10bae0] cursor-pointer`} type="submit">Sign up</Button>
+                <Button
+                  className={`bg-[#15a0bf] hover:bg-[#10bae0] cursor-pointer`}
+                  type="submit"
+                >
+                  Sign up
+                </Button>
                 <FieldDescription className="text-center">
-                   Have an account? <Link href="/sign-in">Sign in</Link>
+                  Have an account? <Link href="/sign-in">Sign in</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
@@ -109,5 +130,5 @@ export default function SignUpPage() {
         and <a href="#">Privacy Policy</a>.
       </FieldDescription>
     </div>
-  )
+  );
 }
