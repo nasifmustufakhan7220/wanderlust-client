@@ -3,7 +3,6 @@ import { Josefin_Sans } from "next/font/google";
 import { Footer } from "@/components/footer";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
-import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 
 const JosefinSans = Josefin_Sans({
@@ -24,9 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${JosefinSans.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Suspense fallback={null}>
           <Navbar />
-        </Suspense>
         <div className="flex-1">
           {children}
         </div>

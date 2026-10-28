@@ -4,8 +4,17 @@ import Link from "next/link";
 import { UserRound } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut, useSession } from "@/lib/auth-client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Button } from "./ui/button";
-
+import { Skeleton } from "@/components/ui/skeleton"
 const leftLinks = [
   { label: "Home", href: "/" },
   { label: "Destinations", href: "/destinations" },
@@ -15,8 +24,8 @@ const leftLinks = [
 
 export function Navbar() {
   const pathname = usePathname();
-  const router = useRouter()
-  const { data: session} = useSession();
+  const router = useRouter();
+  const { data: session, isPending } = useSession();
   return (
     <header className="absolute top-3 right-3 left-3 z-20 rounded-lg bg-white shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
       <nav className="flex h-14 items-center justify-between px-10">
@@ -48,25 +57,54 @@ export function Navbar() {
           />
         </Link>
 
-        <ul className="flex items-center gap-3">
-          {session?.user ? (
-            <>
-              <li>
-                <Link
-                  href="/profile"
-                  className="flex items-center gap-1.5 text-[17px] font-medium text-neutral-900 transition-colors hover:text-[#15A1BF]"
-                >
-                  <UserRound size={18} strokeWidth={2} />
-                  Profile
-                </Link>
-              </li>
+        <ul className="flex items-center gap-5">
+          <li>
+            <Link
+              href="/profile"
+              className="flex gap-1.5 text-[17px] font-medium text-neutral-900 transition-colors hover:text-[#15A1BF]"
+            >
+              <UserRound size={18} strokeWidth={2} />
+              Profile
+            </Link>
+          </li>
 
-              <li>
-                <Button onClick={()=> signOut({fetchOptions:{onSuccess: ()=> router.push('/sign-in')}})} className="text-[17px] font-medium text-neutral-900 transition-colors hover:text-[#15A1BF] bg-white hover:bg-white cursor-pointer">
-                  Sing out
-                </Button>
-              </li>
-            </>
+          {isPending ? <li><Skeleton className="h-10 w-10 rounded-full" /></li>: session?.user ? (
+            <Popover>
+              <PopoverTrigger
+                render={
+                  <Avatar className={`cursor-pointer`}>
+                    <AvatarImage
+                      referrerPolicy="no-referrer"
+                      src={session?.user?.image as string}
+                    />
+                    <AvatarFallback>
+                      {session?.user?.name.charAt(0)}
+                    </AvatarFallback>
+                  </Avatar>
+                }
+              ></PopoverTrigger>
+              <PopoverContent>
+                <PopoverHeader>
+                  <PopoverTitle>{session?.user?.name}</PopoverTitle>
+                  <PopoverDescription>
+                    {session?.user?.email}
+                  </PopoverDescription>
+                  <Button
+                    onClick={() =>
+                      signOut({
+                        fetchOptions: {
+                          onSuccess: () => router.push("/sign-in"),
+                        },
+                      })
+                    }
+                    variant={"destructive"}
+                    className="cursor-pointer"
+                  >
+                    Sing out
+                  </Button>
+                </PopoverHeader>
+              </PopoverContent>
+            </Popover>
           ) : (
             <>
               <li>
