@@ -19,7 +19,7 @@ const leftLinks = [
   { label: "Home", href: "/" },
   { label: "Destinations", href: "/destinations" },
   { label: "Add Destinaton", href: "/add-destination" },
-  { label: "My Bookings", href: "/bookings" },
+  { label: "My Bookings", href: "/my-booking" },
 ];
 
 export function Navbar() {
