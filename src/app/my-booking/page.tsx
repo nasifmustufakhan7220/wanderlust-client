@@ -1,4 +1,4 @@
-import MyBookings from "@/components/MyBookings";
+import MyBookings from "@/components/Booking/MyBookings";
 import { Suspense } from "react";
 
 const MyBookingPage = async () => {

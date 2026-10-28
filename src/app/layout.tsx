@@ -1,10 +1,11 @@
 export const instant = false
 import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
-import { Footer } from "@/components/footer";
+import { Footer } from "@/components/Shared/footer";
 import "./globals.css";
-import { Navbar } from "@/components/navbar";
+
 import { Toaster } from "react-hot-toast";
+import { Navbar } from "@/components/Shared/navbar";
 
 const JosefinSans = Josefin_Sans({
   subsets: ["latin"],

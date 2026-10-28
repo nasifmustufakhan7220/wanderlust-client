@@ -7,10 +7,10 @@ import {
   Check,
   Star,
 } from "lucide-react";
-import { IDestination } from "./DestinationCard";
+import { IDestination } from "./Destination/DestinationCard";
 import EditDialog from "./EditDialog";
 import DeleteDialog from "./DeleteDialog";
-import BookingDestination from "./BookingDestination";
+import BookingDestination from "../Booking/BookingDestination";
 
 // Get destination details from backend
 export const getDetails = async (id: string) => {

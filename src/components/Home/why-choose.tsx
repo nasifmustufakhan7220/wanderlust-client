@@ -21,7 +21,7 @@ const features = [
 export function WhyChoose() {
   return (
     <section className="bg-[#E8F6FB] py-20">
-      <div className="mx-auto max-w-[940px] px-4 text-center">
+      <div className="mx-auto max-w-235 px-4 text-center">
         <h2 className="text-[48px] leading-tight text-[#1c1c1c]">
           Why Choose Wanderlust
         </h2>

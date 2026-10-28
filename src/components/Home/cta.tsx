@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export function Cta() {
   return (
-    <section className="relative isolate flex min-h-[420px] items-center justify-center overflow-hidden px-6 text-center">
+    <section className="relative isolate flex min-h-105 items-center justify-center overflow-hidden px-6 text-center">
       <Image
         src="/CTA.png"
         alt=""

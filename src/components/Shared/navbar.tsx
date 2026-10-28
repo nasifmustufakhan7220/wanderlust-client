@@ -13,8 +13,9 @@ import {
   PopoverTitle,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "./ui/button";
+
 import { Skeleton } from "@/components/ui/skeleton"
+import { Button } from "../ui/button";
 const leftLinks = [
   { label: "Home", href: "/" },
   { label: "Destinations", href: "/destinations" },
@@ -89,6 +90,7 @@ export function Navbar() {
                   <PopoverDescription>
                     {session?.user?.email}
                   </PopoverDescription>
+                  
                   <Button
                     onClick={() =>
                       signOut({

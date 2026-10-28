@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { IDestination } from "./DestinationCard";
+import { IDestination } from "./Destination/DestinationCard";
 
 const Sorting = ({ destinations } : {destinations: IDestination[]}) => {
     console.log(destinations);

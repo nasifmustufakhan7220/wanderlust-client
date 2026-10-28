@@ -1,4 +1,4 @@
-import DestinationsApi from '@/components/DestinationsApi';
+import DestinationsApi from '@/components/Destination/DestinationsApi';
 import { Suspense } from 'react';
 
 const DestinationsPage = () => {

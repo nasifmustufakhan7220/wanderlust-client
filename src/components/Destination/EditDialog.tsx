@@ -23,7 +23,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { IDestination } from "./DestinationCard";
+import { IDestination } from "./Destination/DestinationCard";
 import { useRouter } from "next/navigation";
 const categories = [
   "Beach",

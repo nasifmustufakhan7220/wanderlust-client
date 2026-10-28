@@ -1,6 +1,6 @@
 "use client";
 import { useSession } from "@/lib/auth-client";
-import { IDestination } from "./DestinationCard";
+import { IDestination } from "./Destination/DestinationCard";
 import { ArrowRight, Check } from "lucide-react";
 import toast from "react-hot-toast";
 

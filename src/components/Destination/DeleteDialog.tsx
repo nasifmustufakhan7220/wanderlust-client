@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
-import { IDestination } from "./DestinationCard";
+import { IDestination } from "./Destination/DestinationCard";
 import { redirect, useRouter } from "next/navigation";
 
 const DeleteDialog = ({detail}:{detail: IDestination}) => {
