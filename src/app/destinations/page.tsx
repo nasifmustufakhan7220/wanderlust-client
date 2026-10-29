@@ -1,9 +1,12 @@
-import DestinationsApi from "@/components/Destination/DestinationsApi";
+export const instant = false;
+import DestinationSkeleton from "@/components/Destination/DestinationCardSkeleton";
+import DestinationsApi, { getAllDestinations } from "@/components/Destination/DestinationsApi";
 
 import { Suspense } from "react";
 
 
-const DestinationsPage = () => {
+const DestinationsPage = async() => {
+    const count = await getAllDestinations();
   return (
     <div className="mt-20 w-full bg-white px-5 py-8 sm:px-10 md:px-[5.7%]">
       <div className="mb-9">
@@ -18,7 +21,7 @@ const DestinationsPage = () => {
 
       {/* Filters */}
       
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<DestinationSkeleton count={count.length}/>}>
         <DestinationsApi />
       </Suspense>
     </div>

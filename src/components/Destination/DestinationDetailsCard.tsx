@@ -15,7 +15,7 @@ import { IDestination } from "./DestinationCard";
 // Get destination details from backend
 export const getDetails = async (id: string) => {
   const res = await fetch(`http://localhost:8000/destinations/${id}`);
-
+  if(!res.ok)throw new Error("Failed to fetch destinations");
   return res.json();
 };
 

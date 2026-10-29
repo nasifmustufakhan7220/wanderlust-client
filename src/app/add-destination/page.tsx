@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Save, Trash2 } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const categories = [
   "Beach",
@@ -70,7 +71,10 @@ const AddDestinationPage = () => {
     });
 
     const data = await response.json();
-    console.log(data);
+    if(data){
+      toast.success("Succesfully added to destination!")
+    }
+
   };
   return (
     <div className="px-14 pt-28 pb-16">

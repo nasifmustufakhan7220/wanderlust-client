@@ -3,11 +3,13 @@ import Sorting from "@/components/Destination/Sorting";
 
 export const getAllDestinations = async () => {
   const res = await fetch("http://localhost:8000/destinations");
+  if(!res.ok) throw new Error("Failed to fetch destinations");
   return res.json();
 };
+
 const DestinationsApi = async () => {
   const destinations: IDestination[] = await getAllDestinations();
-
+  
   return (
     <section className="">
       {/* Heading */}
