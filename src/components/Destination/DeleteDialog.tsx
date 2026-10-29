@@ -13,8 +13,9 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
-import { IDestination } from "./Destination/DestinationCard";
+
 import { redirect, useRouter } from "next/navigation";
+import { IDestination } from "./DestinationCard";
 
 const DeleteDialog = ({detail}:{detail: IDestination}) => {
   const router = useRouter();

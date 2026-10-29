@@ -1,8 +1,9 @@
 "use client";
 import { useSession } from "@/lib/auth-client";
-import { IDestination } from "./Destination/DestinationCard";
+
 import { ArrowRight, Check } from "lucide-react";
 import toast from "react-hot-toast";
+import { IDestination } from "../Destination/DestinationCard";
 
 const BookingDestination = ({ detail }: { detail: IDestination }) => {
     const {data:session} = useSession();
