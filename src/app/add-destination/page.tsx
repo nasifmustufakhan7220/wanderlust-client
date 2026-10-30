@@ -77,6 +77,7 @@ const AddDestinationPage = () => {
     });
 
     const result = await response.json();
+    console.log(result);
 
     if(result.msg === "Unauthorized!")
     {
