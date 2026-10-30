@@ -15,6 +15,7 @@ import {
 import { Save, Trash2 } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { authClient } from "@/lib/auth-client";
 
 const categories = [
   "Beach",
@@ -62,17 +63,28 @@ const AddDestinationPage = () => {
   const handelOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const {data} = await authClient.token();
+
+    const token = data?.token;
+
     const response = await fetch("http://localhost:8000/add-destination", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`
       },
       body: JSON.stringify(form)
     });
 
-    const data = await response.json();
-    if(data){
-      toast.success("Succesfully added to destination!")
+    const result = await response.json();
+
+    if(result.msg === "Unauthorized!")
+    {
+      toast.error("Not added to destination! Please log in your account")
+
+    }
+    else{
+      toast.success("Successfully added to the destination!");
     }
 
   };
