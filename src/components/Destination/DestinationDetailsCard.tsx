@@ -1,21 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  ArrowLeft,
-  MapPin,
-  CalendarDays,
-  Check,
-  Star,
-} from "lucide-react";
+import { ArrowLeft, MapPin, CalendarDays, Check, Star } from "lucide-react";
 import EditDialog from "./EditDialog";
 import DeleteDialog from "./DeleteDialog";
 import BookingDestination from "../Booking/BookingDestination";
 import { IDestination } from "./DestinationCard";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 // Get destination details from backend
 export const getDetails = async (id: string) => {
-  const res = await fetch(`http://localhost:8000/destinations/${id}`);
-  if(!res.ok)throw new Error("Failed to fetch destinations");
+  const jwtToken = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  const token = jwtToken?.token;
+
+  const res = await fetch(`http://localhost:8000/destinations/${id}`, {
+     headers: {
+      authorization: `Bearer ${token}`
+    }
+  });
+  if (!res.ok) throw new Error("Failed to fetch destinations");
   return res.json();
 };
 
@@ -25,7 +31,7 @@ const DestinationDetailsCard = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
-  const detail:IDestination = await getDetails(id);
+  const detail: IDestination = await getDetails(id);
 
   return (
     <div className="min-h-screen bg-white px-4 py-6 sm:px-8 lg:px-11">
@@ -41,9 +47,9 @@ const DestinationDetailsCard = async ({
           </Link>
 
           <div className="flex gap-2">
-            <EditDialog detail={detail}/>
+            <EditDialog detail={detail} />
 
-            <DeleteDialog detail={detail}/>
+            <DeleteDialog detail={detail} />
           </div>
         </div>
 
@@ -77,7 +83,11 @@ const DestinationDetailsCard = async ({
             {/* Category and duration */}
             <div className="mt-2 flex gap-3">
               <div className="flex items-center gap-2 text-gray-600 font-medium">
-                <Star size={12} fill="currentColor" className="text-green-600" />
+                <Star
+                  size={12}
+                  fill="currentColor"
+                  className="text-green-600"
+                />
                 <span className="text-[15px]">4.5</span>
               </div>
 
@@ -334,7 +344,7 @@ const DestinationDetailsCard = async ({
           </div>
 
           {/* Right side: Booking card */}
-          <BookingDestination detail={detail}/>
+          <BookingDestination detail={detail} />
         </div>
       </div>
     </div>

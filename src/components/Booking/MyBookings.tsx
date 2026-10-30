@@ -27,16 +27,26 @@ const MyBookings = async () => {
 
   const email = session?.user?.email;
 
-  const res = await fetch(`http://localhost:8000/booking/${email}`);
+  console.log("email", email);
+  const jwtToken = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  const token = jwtToken?.token;
+  console.log(token);
+
+  const res = await fetch(`http://localhost:8000/booking/${email}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
   const bookings: IBooking[] = await res.json();
 
-  
   return (
     <div className="">
-      
       <div className="grid grid-cols-1 gap-4">
         {bookings.map((booking) => (
-          <BookingCard key={booking._id} booking={booking}/>
+          <BookingCard key={booking._id} booking={booking} />
         ))}
       </div>
     </div>

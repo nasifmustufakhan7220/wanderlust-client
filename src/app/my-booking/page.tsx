@@ -1,21 +1,30 @@
 export const instant = false;
 import BookingSkeleton from "@/components/Booking/BookingCardSkeleton";
-import MyBookings, { IBooking} from "@/components/Booking/MyBookings";
+import MyBookings, { IBooking } from "@/components/Booking/MyBookings";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { Suspense } from "react";
 
 const MyBookingPage = async () => {
-   const session = await auth.api.getSession({
-      headers: await headers(),
-    });
-  
-    const email = session?.user?.email;
-  
-    const res = await fetch(`http://localhost:8000/booking/${email}`);
-    if(!res.ok) throw new Error("Failed to fetch destinations");
-    const bookings: IBooking[] = await res.json();
-    
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const email = session?.user?.email;
+
+  const jwtToken = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  const token = jwtToken?.token
+
+  const res = await fetch(`http://localhost:8000/booking/${email}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+  if (!res.ok) throw new Error("Failed to fetch destinations");
+  const bookings: IBooking[] = await res.json();
 
   return (
     <div className="mt-20 mb-20 w-full bg-white px-5 py-8 sm:px-10 md:px-[5.7%]">
@@ -28,7 +37,7 @@ const MyBookingPage = async () => {
           Manage and view your upcoming travel plans
         </p>
       </div>
-      <Suspense fallback={<BookingSkeleton count={bookings.length}/>}>
+      <Suspense fallback={<BookingSkeleton count={bookings.length} />}>
         <MyBookings />
       </Suspense>
     </div>
