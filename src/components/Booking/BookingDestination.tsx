@@ -20,7 +20,7 @@ const BookingDestination = ({ detail }: { detail: IDestination }) => {
             status: false
         }
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_KEY}/booking`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_KEY}booking`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -18,7 +18,7 @@ const MyBookingPage = async () => {
 
   const token = jwtToken?.token
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_KEY}/booking/${email}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_KEY}booking/${email}`, {
     headers: {
       authorization: `Bearer ${token}`,
     },

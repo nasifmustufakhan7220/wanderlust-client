@@ -16,7 +16,7 @@ export const getDetails = async (id: string) => {
 
   const token = jwtToken?.token;
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_KEY}/destinations/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_KEY}destinations/${id}`, {
      headers: {
       authorization: `Bearer ${token}`
     }
