@@ -23,8 +23,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { IDestination } from "./Destination/DestinationCard";
+
 import { useRouter } from "next/navigation";
+import { IDestination } from "./DestinationCard";
 const categories = [
   "Beach",
   "Mountain",
@@ -76,7 +77,7 @@ const EditDialog = ({ detail }: { detail: IDestination }) => {
     >;
 
     const res = await fetch(
-      `http://localhost:8000/destinations/${detail._id}`,
+      `${process.env.NEXT_PUBLIC_API_KEY}/destinations/${detail._id}`,
       {
         method: "PATCH",
         headers: {

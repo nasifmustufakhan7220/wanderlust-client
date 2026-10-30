@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 const BookingCard = ({ booking }: { booking: IBooking }) => {
   const handelDeleteBooking = async (id: string) => {
-    const res = await fetch(`http://localhost:8000/booking/${id}`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_KEY}/booking/${id}`,{
         method: "DELETE"
     });
     const data = await res.json();

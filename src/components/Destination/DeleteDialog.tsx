@@ -20,7 +20,7 @@ import { IDestination } from "./DestinationCard";
 const DeleteDialog = ({detail}:{detail: IDestination}) => {
   const router = useRouter();
   const handelDelete = async(id:string)=>{
-    const res = await fetch(`http://localhost:8000/destinations/${id}`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_KEY}/destinations/${id}`,{
       method: "DELETE",
     });
 

@@ -2,7 +2,7 @@ import DestinationCard, { IDestination } from "./DestinationCard";
 import Sorting from "@/components/Destination/Sorting";
 
 export const getAllDestinations = async () => {
-  const res = await fetch("http://localhost:8000/destinations");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_KEY}/destinations`);
   if(!res.ok) throw new Error("Failed to fetch destinations");
   return res.json();
 };
